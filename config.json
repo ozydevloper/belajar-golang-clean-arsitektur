@@ -1,0 +1,28 @@
+{
+    "app": {
+        "name": "belajar golang clean arsitektur"
+    },
+    "web": {
+        "addr": "127.0.0.1:8080",
+        "idle": "5m",
+        "read": "1m",
+        "write": "1m"
+    },
+    "database": {
+        "name": "belajar_db",
+        "username": "nujabes",
+        "password": "1011001",
+        "host": "localhost",
+        "port": 5432,
+        "ssl": "disable",
+        "pool": {
+            "max": 100,
+            "idle": 10,
+            "lifetime": "1h",
+            "idleLifetime": "30m"
+        }
+    },
+    "log": {
+        "level": 6
+    }
+}
