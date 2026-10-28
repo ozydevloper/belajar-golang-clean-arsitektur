@@ -10,8 +10,8 @@
     },
     "database": {
         "name": "belajar_db",
-        "username": "nujabes",
-        "password": "1011001",
+        "username": "username",
+        "password": "password",
         "host": "localhost",
         "port": 5432,
         "ssl": "disable",

@@ -18,7 +18,7 @@ func NewConfig() *Config {
 
 	config := new(Config)
 
-	config.Log.Level = viperConfig.GetInt("log.lvel")
+	config.Log.Level = viperConfig.GetInt("log.level")
 
 	config.DB.Username = viperConfig.GetString("database.username")
 	config.DB.Password = viperConfig.GetString("database.password")

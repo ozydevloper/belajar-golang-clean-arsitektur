@@ -9,8 +9,8 @@ import (
 )
 
 type RequestUserRegister struct {
-	Email    string `json:"email" validate:"required,email,max=100"`
-	Password string `json:"password" validate:"required,max=100"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 type ResponseUser struct {
@@ -40,7 +40,7 @@ func (c *UserController) Register(ctx fiber.Ctx) error {
 
 	if err := ctx.Bind().Body(&request); err != nil {
 		c.Log.WithError(err).Error("invalid request register")
-		return err
+		return fiber.NewError(fiber.StatusBadRequest, fiber.ErrBadRequest.Error())
 	}
 
 	var user = new(entity.User)
@@ -48,7 +48,7 @@ func (c *UserController) Register(ctx fiber.Ctx) error {
 	user.Password = request.Password
 
 	if err := c.UserUseCase.Create(ctx, user); err != nil {
-		return err
+		return ErrorHandler(err)
 	}
 
 	var response = new(ResponseUser)

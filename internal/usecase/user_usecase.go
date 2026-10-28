@@ -31,13 +31,13 @@ func NewUserUseCase(log *logrus.Logger, validate *validator.Validate, hasher Has
 func (u *UserUseCase) Create(ctx context.Context, request *entity.User) error {
 	if err := u.Validate.Struct(request); err != nil {
 		u.Log.WithError(err).Error("invalid request register")
-		return entity.ErrInternalServerError
+		return entity.ErrBadRequest
 	}
 
 	hashed, err := u.Hasher.HashPassword(request.Password)
 	if err != nil {
 		u.Log.WithError(err).Error("failed to hashing passowrd")
-		return err
+		return entity.ErrInternalServerError
 	}
 
 	var user = new(entity.User)

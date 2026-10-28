@@ -3,6 +3,7 @@ package repository
 import (
 	"belajar-clean-arsitektur/internal/entity"
 	"context"
+	"errors"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -41,6 +42,9 @@ func (r *UserRepository) Create(ctx context.Context, userEntity *entity.User) er
 
 	if err := tx.Create(&user).Error; err != nil {
 		r.Log.WithError(err).Error("failed to create user")
+		if errors.Is(err, gorm.ErrDuplicatedKey) {
+			return entity.ErrConflict
+		}
 		return entity.ErrInternalServerError
 	}
 
